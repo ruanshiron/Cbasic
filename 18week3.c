@@ -1,3 +1,5 @@
+/*by Nguyen The Vinh*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
