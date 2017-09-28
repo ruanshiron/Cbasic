@@ -137,12 +137,8 @@ void readfile()
     else {
         do
         {
-            if (fscanf(fin,"%[^,]", sv[count].id) == EOF) break;
-            fgetc(fin);
-            fscanf(fin,"%[^,]", sv[count].name);
-            fgetc(fin);
             char cbasic[10];
-            fscanf(fin,"%[^\n]", cbasic);
+            if (fscanf(fin,"%[^,],%[^,],%s",sv[count].id, sv[count].name, cbasic) == EOF) break;
             sv[count].cbasic=(double)atof(cbasic);
             count++;
         } while (fgetc(fin)!= EOF);
