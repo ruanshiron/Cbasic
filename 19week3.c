@@ -29,16 +29,19 @@ struct student* insertwhere(double cbasic)
 {
     struct student *insert=head;
     struct student *aft_insert=head->next;
-    if (insert->next==NULL)
+    while(insert!=NULL)
     {
-        return insert;
+        if (insert->next==NULL)
+        {
+            return insert;
+        }
+        else if ((insert->cbasic<cbasic) && (aft_insert->cbasic>cbasic))
+        {
+            return insert;
+        }
+        aft_insert = aft_insert->next;
+        insert = insert->next;
     }
-    else if ((insert->cbasic<cbasic) && (aft_insert->cbasic>cbasic))
-    {
-        return insert;
-    }
-    aft_insert = aft_insert->next;
-    insert = insert->next;
 }
 
 void insert()
