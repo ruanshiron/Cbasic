@@ -86,7 +86,7 @@ int getFile()
     while (1)
     {
         if (fscanf(f,"%s    %[^\n]\n",eng , viet)==EOF) break;
-        viet[strlen(viet)-1]='\0';
+        viet[strlen(viet)]='\0';
         insert(eng, viet);
     } 
     fclose(f);
@@ -183,7 +183,7 @@ int translateOption()
     if (root==NULL) return 0;
     if (wordEx(text, tran)==-1) 
     {
-        printf("Thieu tu\n");
+        printf("Thieu tu\n\n");
         addWord();
     }
     else printf("\nTranlate: %s\n", tran);
