@@ -58,6 +58,19 @@ struct queue_student remove_student()
     return current_top;
 }
 
+void print_to_file()
+{
+    FILE *f;
+    f = fopen("sinhvien2.dat","w+");
+    while(count!=0)
+    {
+        struct queue_student print = remove_student();
+        fprintf(f,"%s,%s,%lf\n", print.id, print.name, print.cbasic);
+    }
+    fclose(f);
+
+}
+
 int main()
 {
     FILE *f;
@@ -73,11 +86,6 @@ int main()
         } while(getc(f)!=EOF);
     }
     fclose(f);
-    
-    while(count!=0)
-    {
-        struct queue_student print = remove_student();
-        printf("%s, %s, %lf\n", print.id, print.name, print.cbasic);
-    }
+    print_to_file();
     return 0;
 }

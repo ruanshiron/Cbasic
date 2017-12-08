@@ -18,12 +18,12 @@ static int top=-1;
 void print_stack_to_file()
 {
     FILE *f;
-    f = fopen("sinhvien.dat2","w+");
-    int i=0;
-    while (i!=top)
+    f = fopen("sinhvien2.dat","w+");
+    int i=top-1;
+    while (i!=-1)
     {
         fprintf(f,"%s,%s,%lf\n", stack[i].id, stack[i].name, stack[i].cbasic);
-        i++;
+        i--;
     }
     fclose(f);
 }

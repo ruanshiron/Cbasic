@@ -12,7 +12,7 @@ struct stack_student
     struct stack_student *next;
 };
 
-struct stack_student *head;
+struct stack_student *head=NULL;
 
 void add_top(char *id, char *name, char *cbasic)
 {
@@ -26,6 +26,19 @@ void add_top(char *id, char *name, char *cbasic)
     head = link;
 }
 
+struct stack_student* delete_first()
+{
+
+   //luu tham chieu toi first link
+   struct stack_student *tempLink = head;
+	
+   //danh dau next toi first link la first 
+   if (head!=NULL) head = head->next;
+	
+   //tra ve link bi xoa
+   return tempLink;
+}
+
 void print_stack()
 {
     struct stack_student *print = head;
@@ -35,6 +48,20 @@ void print_stack()
         printf("%s,%s,%lf\n", print->id, print->name, print->cbasic);
         print= print->next;
     }
+}
+
+void print_stack_to_file()
+{
+    FILE *f;
+    f = fopen("sinhvien2.dat","w+");
+    while (1)
+    {
+        struct stack_student *delete = delete_first();
+        if (delete!=NULL)
+            fprintf(f,"%s,%s,%lf\n", delete->id, delete->name, delete->cbasic);
+        else break;
+    }
+    fclose(f);
 }
 
 int main()
@@ -55,6 +82,8 @@ int main()
     fclose(f);
 
     print_stack();
+
+    print_stack_to_file();
 
     return 0;
 }

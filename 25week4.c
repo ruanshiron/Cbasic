@@ -11,8 +11,8 @@ struct queue_student
     struct queue_student *next;
 };
 
-struct queue_student *front;
-struct queue_student *rear;
+struct queue_student *front=NULL;
+struct queue_student *rear=NULL;
 //int rear = 0;
 
 void enqueue(char *id, char *name, char *cbasic)
@@ -40,22 +40,36 @@ struct queue_student* dequeue()
 {
     struct queue_student *del;
     if (front == NULL) return NULL;
-    del = front;
-    front = front->next;
+    else if (rear!=front)
+    {
+        del = front;
+        front = front->next;
+    }
+    else 
+    {
+        del = rear;
+        rear=NULL;
+        front=NULL;
+    }
     return del;
 }
 
-//Hàm In khác để check việc in ra bằng dequeue
-/*void print()
+// in ra bằng dequeue
+void print_to_file()
 {
-    struct queue_student *print = front;
-
-    while(print!= NULL)
+    FILE *f;
+    f = fopen("sinhvien2.dat","w+");
+    struct queue_student *print ;
+    do
     {
-        printf("%s,%s,%lf\n", print->id, print->name, print->cbasic);
-        print= print->next;
-    }
-}*/
+        print = dequeue();
+        if (print!=NULL)
+            fprintf(f,"%s,%s,%lf\n", print->id, print->name, print->cbasic);
+        else break;
+    } while(front!=NULL);
+
+    fclose(f);
+}
 
 int main()
 {
@@ -75,14 +89,9 @@ int main()
     fclose(f);
 
     //In ra de check 
-    do
-    {
-        struct queue_student *print = (struct queue_student*) malloc(sizeof(struct queue_student));
-        print = dequeue();
-        if (print == NULL) break;
-        printf("\n%s %s %lf", print->id, print->name, print->cbasic);
-    } while(1);
-    printf("\n");
+    
+
+    print_to_file();
 
     return 0;
 }
